@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name="ASR-metrics",
-    version="1.0.1",
+    version="1.0.12",
     description="A Python package to get CER and WER for automatic speech recognitions",
     long_description=readme(),
     long_description_content_type="text/markdown",
