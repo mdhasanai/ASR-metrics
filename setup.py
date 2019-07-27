@@ -8,7 +8,7 @@ def readme():
 
 setup(
     name="ASR-metrics",
-    version="1.0.0",
+    version="1.0.1",
     description="A Python package to get CER and WER for automatic speech recognitions",
     long_description=readme(),
     long_description_content_type="text/markdown",
@@ -23,10 +23,10 @@ setup(
     ],
     packages=["ASR_metrics"],
     include_package_data=True,
-    install_requires=["requests"],
+    install_requires=["python-Levenshtein==0.12.0"],
     entry_points={
         "console_scripts": [
-            "ASR-metrics=ASR_metrics.cli:main",
+            "ASR-metrics=ASR_metrics.calculate.__main__:main",
         ]
     },
 )

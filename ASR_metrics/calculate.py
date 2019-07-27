@@ -1,5 +1,5 @@
 import argparse
-from utils import *
+import utils 
 
 
 def main():
@@ -7,13 +7,13 @@ def main():
     parser = argparse.ArgumentParser(description = "Weather Reporter") 
   
     parser.add_argument("-s1", "--string1", type = str, nargs = '*', 
-	                    metavar = "location", default = None, help = "Actual string or list of string ") 
+	                    metavar = "first string", default = None, help = "Actual string or list of string ") 
 	                    
     parser.add_argument("-s2", "--string2", type = str, nargs = '*', 
-	                    metavar = "location", default = None, help = "Predicted string of list of string") 
+	                    metavar = "second string", default = None, help = "Predicted string of list of string") 
 
     parser.add_argument("-lp", "--listpair", type = str, nargs = '*', 
-                        metavar = "location", default = None, help = "Predicted string of list of string") 
+                        metavar = "string pair", default = None, help = "String pair of Actual and predicted [(s1,s2)]") 
 
     
     parser.add_argument("-d", "--days", type = int, nargs = 1, 
@@ -25,12 +25,12 @@ def main():
     #weather_data = get_weather(args.query, args.days[0])
     r1,r2 = 0,0
     if args.listpair is not None:
-        r1 = compute_wer_list_pair(args.listpair)
-        r2 = calculate_cer_list_pair(args.listpair)
+        r1 = utils.compute_wer_list_pair(args.listpair)
+        r2 = utils.calculate_cer_list_pair(args.listpair)
         #return r1,r2
     else:
-        r1 = calculate_cer(' '.join(args.string1),' '.join(args.string2))
-        r2 = calculate_wer(' '.join(args.string1),' '.join(args.string2))
+        r1 = utils.calculate_cer(' '.join(args.string1),' '.join(args.string2))
+        r2 = utils.calculate_wer(' '.join(args.string1),' '.join(args.string2))
         
         #return r1 , r2
     #print_weather_details(weather_data)
