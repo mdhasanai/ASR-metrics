@@ -7,11 +7,15 @@ def main():
     parser = argparse.ArgumentParser(description = "Weather Reporter") 
   
     parser.add_argument("-s1", "--string1", type = str, nargs = '*', 
-	                    metavar = "location", default = None, help = "Location") 
+	                    metavar = "location", default = None, help = "Actual string or list of string ") 
 	                    
     parser.add_argument("-s2", "--string2", type = str, nargs = '*', 
-	                    metavar = "location", default = None, help = "Location") 
+	                    metavar = "location", default = None, help = "Predicted string of list of string") 
 
+    parser.add_argument("-lp", "--listpair", type = str, nargs = '*', 
+                        metavar = "location", default = None, help = "Predicted string of list of string") 
+
+    
     parser.add_argument("-d", "--days", type = int, nargs = 1, 
 	                    metavar = "days", default = [1], help = "Number of days") 
 
@@ -19,9 +23,18 @@ def main():
     args = parser.parse_args()
     #print(' '.join(args.string1))
     #weather_data = get_weather(args.query, args.days[0])
-    result = calculate_cer(' '.join(args.string1),' '.join(args.string2))
+    r1,r2 = 0,0
+    if args.listpair is not None:
+        r1 = compute_wer_list_pair(args.listpair)
+        r2 = calculate_cer_list_pair(args.listpair)
+        #return r1,r2
+    else:
+        r1 = calculate_cer(' '.join(args.string1),' '.join(args.string2))
+        r2 = calculate_wer(' '.join(args.string1),' '.join(args.string2))
+        
+        #return r1 , r2
     #print_weather_details(weather_data)
-    print(result)
+    print("CER: {:.4f}, WER: {:.4f}".format(r1,r2))
 
 
 if __name__ == "__main__":
